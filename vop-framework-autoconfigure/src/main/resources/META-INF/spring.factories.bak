@@ -1,0 +1,15 @@
+# Bootstrap Configuration: META-INF/spring.factories
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.wynd.vop.framework.autoconfigure.service.VopServiceAutoConfiguration,\
+com.wynd.vop.framework.autoconfigure.rest.VopRestAutoConfiguration,\
+com.wynd.vop.framework.autoconfigure.audit.AuditAutoConfiguration,\
+com.wynd.vop.framework.autoconfigure.feign.VopFeignAutoConfiguration,\
+com.wynd.vop.framework.autoconfigure.security.VopSecurityAutoConfiguration,\
+com.wynd.vop.framework.autoconfigure.cache.VopCacheAutoConfiguration,\
+com.wynd.vop.framework.autoconfigure.cache.server.VopEmbeddedRedisServer,\
+com.wynd.vop.framework.autoconfigure.swagger.VopSwaggerAutoConfiguration,\
+com.wynd.vop.framework.autoconfigure.validator.VopValidatorAutoConfiguration
+

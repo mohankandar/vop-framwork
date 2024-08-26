@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<included>
+	<shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook" />
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include
+		resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+	<springProperty scope="context" name="app_name"
+		source="spring.application.name" />
+	<springProperty scope="context" name="app_profile"
+		source="spring.profiles.active" />
+	<springProperty scope="context" name="app_version"
+		source="info.build.version" />
+
+	<appender name="VOP_FRAMEWORK_CONSOLE_LOG_ENCODER" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- JSON composite encoder instead of the LogstashEncoder. The composite 
+			encoders allow you to selectively add things as needed (rather than removing 
+			things). IMPORTANT NOTE: Don't add <message> field as the provider class 
+			[VopMaskingMessageProvider] is enabled for masking If added in the <providers>
+			section, then the message field will be logged twice. -->
+		<encoder
+			class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<context /> <!--Outputs entries from logback's context -->
+				<pattern>
+					<pattern>
+						{
+						"logType": "%mdc{logType:-applogs}",
+						"severity": "%level",
+						"class": "%logger{40}",
+						"pid": "${PID:-}"
+						}
+					</pattern>
+				</pattern>
+				<threadName />
+				<mdc /> <!-- MDC variables on the Thread will be written as JSON fields -->
+				<logstashMarkers /> <!-- Useful so we can add extra information for specific log lines as Markers -->
+				<arguments /> <!--or through StructuredArguments -->
+				<stackTrace>
+					<!-- limit the size of stack traces, show root cause first -->
+					<throwableConverter
+						class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+						<maxDepthPerThrowable>30</maxDepthPerThrowable>
+						<maxLength>2048</maxLength>
+						<shortenedClassNameLength>40</shortenedClassNameLength>
+						<rootCauseFirst>true</rootCauseFirst>
+					</throwableConverter>
+				</stackTrace>
+
+				<provider
+					class="com.wynd.vop.framework.log.logback.VopMaskingMessageProvider">
+					<!-- - Base rules for masking data, apps. Can add more rules via VopMaskRules.addRule(..).
+						- By default, all fields are subject to each defined <rule>. -->
+					<!-- Rules are embodied in VopMaskRule -->
+					<rules>
+						<!-- Credit cards are a challenge to identify, especially if foreign 
+							cards are included. See: https://en.wikipedia.org/wiki/Payment_card_number 
+							https://baymard.com/checkout-usability/credit-card-patterns -->
+						<rule>
+							<name>Credit Card</name>
+							<prefix></prefix>
+							<!-- limits length 13-19 digits -->
+							<pattern>\d{13,19}</pattern>
+							<suffix></suffix>
+							<unmasked>4</unmasked>
+						</rule>
+						<!-- Bank Account Number USA. US doesn't conform to IBAN standards for account numbers; 
+							 AFAIK there is no definitive US standard for account numbers -->
+						<rule>
+							<name>Bank Account USA</name>
+							<prefix></prefix>
+							<!-- limits length 12-17 digits -->
+							<pattern>\b[0-9]{12,17}\b</pattern>
+							<suffix></suffix>
+							<unmasked>4</unmasked>
+						</rule>
+						<rule>
+							<name>SSN</name>
+							<prefix></prefix>
+							<!-- Finds 9 digit numbers within word boundaries, not separated or separated 
+								by - or space, not starting with 000, 666, or 900-999, not containing 00 
+								or 0000 in the middle or at the end of SSN (in compliance with current SSN 
+								rules).. -->
+							<pattern>\b(?!000)(?!666)(?!9)[0-9]{3}[ -]?(?!00)[0-9]{2}[ -]?(?!0000)[0-9]{4}\b</pattern>
+							<suffix></suffix>
+							<unmasked>4</unmasked>
+						</rule>
+					</rules>
+				</provider>
+			</providers>
+		</encoder>
+	</appender>
+
+	<!-- Async appenders can drastically speed up logging as well as your application's 
+		response time but with some potential drawbacks. Read more at. https://logback.qos.ch/manual/appenders.html#AsyncAppender 
+		http://blog.takipi.com/how-to-instantly-improve-your-java-logging-with-7-logback-tweaks/ 
+		Always be sure to test different configurations for yourself. Every application 
+		has different requirements. -->
+	<appender name="VOP_FRAMEWORK_ASYNC_CONSOLE_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>250000</queueSize> <!--default is 256. No data yet available to support any specific queueSize, 
+			set to 250,000 events -->
+		<discardingThreshold>0</discardingThreshold> <!--events are not discarded -->
+		<appender-ref ref="VOP_FRAMEWORK_CONSOLE_LOG_ENCODER" />
+	</appender>
+
+</included>
