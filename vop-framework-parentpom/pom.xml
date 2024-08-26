@@ -1,0 +1,1174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.5</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.wynd.vop.framework</groupId>
+  <artifactId>vop-framework-parentpom</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.3</version>
+  <name>${project.artifactId}</name>
+  <description>Parent POM for VOP Application Framework - Spring Boot and Cloud Enabled
+  </description>
+
+  <properties>
+    <!-- Log4j2 version -->
+    <log4j2.version>2.17.1</log4j2.version>
+
+    <!-- Maven JAR Plugin version -->
+    <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+
+    <!-- Project source and reporting encoding -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!-- Java version -->
+    <java.version>1.8</java.version>
+
+    <!-- Base URL for repositories -->
+    <repo.baseurl>https://nexus.dev.vop.va.gov/repository</repo.baseurl>
+
+    <!-- Repository mirrors and types -->
+    <repo.mirror>${repo.baseurl}/maven-public</repo.mirror>
+    <repo.release>${repo.baseurl}/maven-releases</repo.release>
+    <repo.snapshot>${repo.baseurl}/maven-snapshots</repo.snapshot>
+
+    <!-- JaCoCo configuration for coverage reports -->
+    <jacoco.outputRootDir>${project.basedir}/target/jacoco</jacoco.outputRootDir>
+    <jacoco.dataFile>${project.build.directory}/site/jacoco.exec</jacoco.dataFile>
+    <jacoco.destFile>${jacoco.dataFile}</jacoco.destFile>
+    <jacoco.reportDir>${jacoco.outputRootDir}/jacoco</jacoco.reportDir>
+
+    <!-- SonarQube configuration -->
+    <sonar.host.url>http://localhost:9000</sonar.host.url>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.coverage.jacoco.xmlReportPaths>**/target/jacoco/jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
+    <sonar.profile.java>VOP</sonar.profile.java>
+    <sonar.coverage.exclusions>
+      **/api/v*/transfer/**/*,**/*Application.java,**/*AbstractRemoteServiceCallMock.java
+    </sonar.coverage.exclusions>
+    <sonar.exclusions>
+      **/api/v*/transfer/**/*,**/*Application.java,**/*AbstractRemoteServiceCallMock.java
+    </sonar.exclusions>
+    <sonar.test.exclusions>**/test/*</sonar.test.exclusions>
+
+    <!-- Integration test patterns ************FUTURE******************-->
+    <include.int.tests.pattern>**/*IT.java,**/*Runner.java</include.int.tests.pattern>
+
+    <!-- Plugin and lifecycle mapping versions -->
+    <lifecycle.mapping.version>1.0.0</lifecycle.mapping.version>
+    <templating-maven-plugin.version>1.0.0</templating-maven-plugin.version>
+
+    <!-- JAXB and related plugins -->
+    <jaxb2-maven-plugin-codehaus.version>1.5</jaxb2-maven-plugin-codehaus.version>
+    <maven-jaxb2-plugin-jvnet.version>0.14.0</maven-jaxb2-plugin-jvnet.version>
+    <krasa-jaxb-tools.version>1.5</krasa-jaxb-tools.version>
+    <jaxb2-basics-annotate.version>1.1.0</jaxb2-basics-annotate.version>
+
+    <!-- Web service and time library versions -->
+    <jaxws-api.version>2.3.1</jaxws-api.version>
+    <joda-time.version>2.9</joda-time.version>
+    <saaj-impl.version>1.5.1</saaj-impl.version>
+
+    <!-- Various plugins and libraries -->
+    <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+    <sca-maven-plugin.version>19.2.0</sca-maven-plugin.version>
+    <dockerfile-maven-plugin.version>1.4.4</dockerfile-maven-plugin.version>
+
+    <!-- Metrics and monitoring versions ***************FUTURE***************** -->
+    <spring-metrics.version>0.5.1.RELEASE</spring-metrics.version>
+    <prometheus.version>0.5.0</prometheus.version>
+
+    <!-- Site and deployment plugins -->
+    <site-maven-plugin.version>0.12</site-maven-plugin.version>
+    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+
+    <!-- Testing libraries and plugins -->
+    <mockito-core.version>3.7.0</mockito-core.version>
+    <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+    <surefire-junit47.version>3.0.0-M5</surefire-junit47.version>
+    <maven-cucumber-reporting.version>5.4.0</maven-cucumber-reporting.version>
+    <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+    <jmeter-maven-plugin.version>2.9.0</jmeter-maven-plugin.version>
+    <jmeter-maven-plugin.versionRange>[2.8.5,)</jmeter-maven-plugin.versionRange>
+    <testng.version>7.3.0</testng.version>
+    <cucumber.version>1.2.5</cucumber.version>
+    <junit-vintage-engine.version>5.7.0</junit-vintage-engine.version>
+
+    <!-- Spring Cloud and AWS dependencies -->
+    <spring-cloud-dependencies.version>2021.0.5</spring-cloud-dependencies.version>
+    <spring-cloud-aws-dependencies.version>2.3.3</spring-cloud-aws-dependencies.version>
+
+    <!-- Resilience4j and JWT libraries -->
+    <resilience4j.springboot2.version>1.7.0</resilience4j.springboot2.version>
+    <resilience4j.feign.version>1.7.0</resilience4j.feign.version>
+    <jjwt.version>0.9.1</jjwt.version>
+
+    <!-- WS and API libraries -->
+    <wss4j.version>1.6.19</wss4j.version>
+    <el-impl.version>2.2</el-impl.version>
+    <axiom-impl.version>1.3.0</axiom-impl.version>
+    <swagger-ui.version>4.2.1</swagger-ui.version>
+    <swagger-annotations.version>1.6.2</swagger-annotations.version>
+    <openapi.codegen.version>3.3.4</openapi.codegen.version>
+
+    <!-- Additional utility and library versions -->
+    <google.codereplacer.version>1.5.3</google.codereplacer.version>
+    <fest-assert.version>2.0M10</fest-assert.version>
+    <commons-io.version>2.8.0</commons-io.version>
+    <commons-lang3.version>3.11</commons-lang3.version>
+    <jackson-databind.version>2.13.4.2</jackson-databind.version>
+    <jackson-core.version>2.13.4</jackson-core.version>
+    <jackson-annotations.version>2.13.4</jackson-annotations.version>
+    <jackson-jsr310.version>2.13.4</jackson-jsr310.version>
+    <commons-logging.version>1.2</commons-logging.version>
+    <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
+    <janino-version>3.0.13</janino-version>
+    <logback-classic.version>1.2.3</logback-classic.version>
+    <embedded-redis.version>0.6</embedded-redis.version>
+    <jfiglet.version>0.0.8</jfiglet.version>
+    <httpclient.version>4.5.13</httpclient.version>
+
+    <!-- Database drivers -->
+    <h2.version>2.1.210</h2.version>
+    <postgresql.version>42.5.0</postgresql.version>
+    <ojdbc6.version>11.2.0.4</ojdbc6.version>
+    <ojdbc7.version>12.1.0.2</ojdbc7.version>
+    <ojdbc8.version>12.2.0.1</ojdbc8.version>
+    <ojdbc10.version>19.3</ojdbc10.version>
+
+    <!-- Liquibase versions -->
+    <liquibase-core.version>${liquibase.version}</liquibase-core.version>
+    <liquibase-hibernate5.version>3.8</liquibase-hibernate5.version>
+
+    <!-- Validation API and Spring framework versions -->
+    <validation-api.version>2.0.1.Final</validation-api.version>
+    <spring-core.version>5.3.23</spring-core.version>
+    <spring-data-jpa.version>2.7.5</spring-data-jpa.version>
+    <spring-ws.version>3.1.4</spring-ws.version>
+    <spring-security.version>5.7.5</spring-security.version>
+
+    <!-- Google services and testing libraries -->
+    <google-auto-service.version>1.0-rc6</google-auto-service.version>
+    <google-gson.version>2.10</google-gson.version>
+    <google-compile-testing.version>0.18</google-compile-testing.version>
+
+    <!-- Networking and YAML libraries -->
+    <netty-codec.version>4.1.68.Final</netty-codec.version>
+    <snakeyaml.version>1.33</snakeyaml.version>
+    <cryptacular.version>1.2.4</cryptacular.version>
+    <jetty-io.version>9.4.12.v20180830</jetty-io.version>
+    <org.apache.commons.version>1.21</org.apache.commons.version>
+  </properties>
+
+
+  <repositories>
+    <repository>
+      <id>nexus3</id>
+      <name>VOP Nexus Repository</name>
+      <url>${repo.mirror}</url>
+    </repository>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>spring-cloud</id>
+      <name>Spring Cloud</name>
+      <url>https://github.com/spring-cloud</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>maven-central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>nexus3</id>
+      <name>VOP Nexus Repository</name>
+      <url>${repo.mirror}</url>
+    </pluginRepository>
+    <pluginRepository>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2</url>
+      <layout>default</layout>
+    </pluginRepository>
+    <pluginRepository>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>spring-plugins</id>
+      <name>Spring Plugin Repo</name>
+      <url>https://repo.spring.io/plugins-release</url>
+      <layout>default</layout>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <distributionManagement>
+    <repository>
+      <id>nexus3</id>
+      <url>${repo.release}</url>
+    </repository>
+    <snapshotRepository>
+      <id>nexus3</id>
+      <url>${repo.snapshot}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Apache Tomcat core library for embedding Tomcat in your application -->
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>9.0.60</version>
+      </dependency>
+
+      <!-- Apache Commons Compress library for compression and decompression utilities -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>${org.apache.commons.version}</version>
+      </dependency>
+
+      <!-- Netty Codec library for encoding and decoding in network communication -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-codec</artifactId>
+        <version>${netty-codec.version}</version>
+      </dependency>
+
+      <!-- SnakeYAML library for parsing and emitting YAML -->
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
+      </dependency>
+
+      <!-- Jackson Databind library for JSON serialization and deserialization -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson-databind.version}</version>
+      </dependency>
+
+      <!-- Jackson Core library for low-level JSON processing -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson-core.version}</version>
+      </dependency>
+
+      <!-- Jackson Annotations library for annotations used by Jackson -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson-annotations.version}</version>
+      </dependency>
+
+      <!-- Jackson JSR310 library for Java 8 Date and Time API support -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>${jackson-jsr310.version}</version>
+      </dependency>
+
+      <!-- Joda-Time library for date and time handling before Java 8 -->
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${joda-time.version}</version>
+      </dependency>
+
+      <!-- Cryptacular library for cryptographic utilities -->
+      <dependency>
+        <groupId>org.cryptacular</groupId>
+        <artifactId>cryptacular</artifactId>
+        <version>${cryptacular.version}</version>
+      </dependency>
+
+      <!-- Spring Cloud dependencies for managing Spring Cloud dependencies -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud-dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Spring Cloud AWS dependencies for managing AWS dependencies in Spring Cloud -->
+      <dependency>
+        <groupId>io.awspring.cloud</groupId>
+        <artifactId>spring-cloud-aws-dependencies</artifactId>
+        <version>${spring-cloud-aws-dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- Logstash Logback Encoder for sending logs to Logstash -->
+      <dependency>
+        <groupId>net.logstash.logback</groupId>
+        <artifactId>logstash-logback-encoder</artifactId>
+        <version>${logstash-logback-encoder.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- Logback Classic library for logging with Logback -->
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+
+      <!-- Logback Core library required by Logback Classic -->
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+
+      <!-- Janino library for lightweight Java compiler -->
+      <dependency>
+        <groupId>org.codehaus.janino</groupId>
+        <artifactId>janino</artifactId>
+        <version>${janino-version}</version>
+      </dependency>
+
+      <!-- Embedded Redis library for in-memory Redis server -->
+      <dependency>
+        <groupId>com.github.kstyrc</groupId>
+        <artifactId>embedded-redis</artifactId>
+        <version>${embedded-redis.version}</version>
+      </dependency>
+
+      <!-- Commons IO library for IO utilities -->
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+
+      <!-- Commons Logging library for logging abstraction -->
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>${commons-logging.version}</version>
+      </dependency>
+
+      <!-- Apache HTTP Client library for HTTP communication -->
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpclient.version}</version>
+      </dependency>
+
+      <!-- JFIGlet library for rendering text in FIGlet font -->
+      <dependency>
+        <groupId>com.github.lalyos</groupId>
+        <artifactId>jfiglet</artifactId>
+        <version>${jfiglet.version}</version>
+      </dependency>
+
+      <!-- Apache WSS4J library for WS-Security -->
+      <dependency>
+        <groupId>org.apache.ws.security</groupId>
+        <artifactId>wss4j</artifactId>
+        <version>${wss4j.version}</version>
+      </dependency>
+
+      <!-- Google Auto Service library for simplifying annotation processing -->
+      <dependency>
+        <groupId>com.google.auto.service</groupId>
+        <artifactId>auto-service</artifactId>
+        <version>${google-auto-service.version}</version>
+        <optional>true</optional>
+      </dependency>
+
+      <!-- Gson library for JSON parsing and serialization -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${google-gson.version}</version>
+      </dependency>
+
+      <!-- JUnit Vintage Engine for running JUnit 3/4 tests with JUnit 5 -->
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <version>${junit-vintage-engine.version}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- Mockito Core library for mocking in tests -->
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>${mockito-core.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Google Compile Testing library for compile-time testing -->
+      <dependency>
+        <groupId>com.google.testing.compile</groupId>
+        <artifactId>compile-testing</artifactId>
+        <version>${google-compile-testing.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Micrometer Core library for application metrics collection -->
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-core</artifactId>
+        <version>${micrometer.version}</version>
+      </dependency>
+
+      <!-- Micrometer Prometheus registry for exporting metrics to Prometheus -->
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-prometheus</artifactId>
+        <version>${micrometer.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <!-- OpenAPI Generator CLI for generating API client libraries, server stubs, and API documentation -->
+      <dependency>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-cli</artifactId>
+        <version>${openapi.codegen.version}</version>
+      </dependency>
+
+      <!-- OpenAPI Generator for generating code from OpenAPI specifications -->
+      <dependency>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator</artifactId>
+        <version>${openapi.codegen.version}</version>
+      </dependency>
+
+      <!-- Resilience4j Spring Boot 2 integration for resilience and fault tolerance in microservices -->
+      <dependency>
+        <groupId>io.github.resilience4j</groupId>
+        <artifactId>resilience4j-spring-boot2</artifactId>
+        <version>${resilience4j.springboot2.version}</version>
+      </dependency>
+
+      <!-- Resilience4j integration for Feign clients for resilience and fault tolerance -->
+      <dependency>
+        <groupId>io.github.resilience4j</groupId>
+        <artifactId>resilience4j-feign</artifactId>
+        <version>${resilience4j.feign.version}</version>
+      </dependency>
+
+      <!-- H2 Database engine for in-memory or embedded database usage, useful for testing -->
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <scope>runtime</scope>
+        <version>${h2.version}</version>
+      </dependency>
+
+      <!-- PostgreSQL JDBC driver for connecting to PostgreSQL databases -->
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgresql.version}</version>
+      </dependency>
+
+      <!-- Oracle JDBC driver for connecting to Oracle databases (version 6) -->
+      <dependency>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc6</artifactId>
+        <version>${ojdbc6.version}</version>
+      </dependency>
+
+      <!-- Oracle JDBC driver for connecting to Oracle databases (version 7) -->
+      <dependency>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc7</artifactId>
+        <version>${ojdbc7.version}</version>
+      </dependency>
+
+      <!-- Oracle JDBC driver for connecting to Oracle databases (version 8) -->
+      <dependency>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc8</artifactId>
+        <version>${ojdbc8.version}</version>
+      </dependency>
+
+      <!-- Oracle JDBC driver for connecting to Oracle databases (version 10) -->
+      <dependency>
+        <groupId>com.oracle</groupId>
+        <artifactId>ojdbc10</artifactId>
+        <version>${ojdbc10.version}</version>
+      </dependency>
+
+      <!-- Liquibase core for database schema management and migrations -->
+      <dependency>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-core</artifactId>
+        <version>${liquibase-core.version}</version>
+      </dependency>
+
+      <!-- Liquibase Hibernate 5 extension for integrating Liquibase with Hibernate 5 -->
+      <dependency>
+        <groupId>org.liquibase.ext</groupId>
+        <artifactId>liquibase-hibernate5</artifactId>
+        <version>${liquibase-hibernate5.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- JAX-WS API for Java API for XML Web Services -->
+      <dependency>
+        <groupId>javax.xml.ws</groupId>
+        <artifactId>jaxws-api</artifactId>
+        <version>${jaxws-api.version}</version>
+      </dependency>
+
+      <!-- SAAJ (SOAP with Attachments API for Java) implementation for handling SOAP messages -->
+      <dependency>
+        <groupId>com.sun.xml.messaging.saaj</groupId>
+        <artifactId>saaj-impl</artifactId>
+        <version>${saaj-impl.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <!-- Define the name of the final artifact produced by the build -->
+    <finalName>${project.artifactId}</finalName>
+
+    <!-- Resources configuration -->
+    <resources>
+      <!-- Main resources directory with filtering enabled -->
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*</include>
+        </includes>
+        <excludes>
+          <!-- Exclude specific paths and file types from processing -->
+          <exclude>**/cert/*</exclude>
+          <exclude>**/*.jks</exclude>
+          <exclude>**/wyndservices-document-inttest/src/inttest/resources/documents/*</exclude>
+        </excludes>
+      </resource>
+      <!-- Resources from the cert directory without filtering -->
+      <resource>
+        <directory>src/main/resources/cert</directory>
+      </resource>
+      <!-- Include JKS files without filtering -->
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>**/*.jks</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <!-- Plugins configuration -->
+    <plugins>
+      <!-- Spring Boot Maven Plugin for build info generation -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>build-info</id>
+            <goals>
+              <goal>build-info</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Maven Compiler Plugin for specifying Java source and target versions -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+
+      <!-- Maven Javadoc Plugin for generating Javadoc documentation -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <failOnError>false</failOnError>
+          <doclint>none</doclint>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Maven JAR Plugin for customizing JAR manifest entries -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Build-Time>${maven.build.timestamp}</Build-Time>
+              <Implementation-Version>${project.version}</Implementation-Version>
+              <Implementation-GIT-Revision>${GIT_COMMIT}</Implementation-GIT-Revision>
+              <Implementation-Build-Number>${BUILD_NUMBER}</Implementation-Build-Number>
+            </manifestEntries>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Maven Surefire Plugin for running unit tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skipTests>${skipTests}</skipTests>
+          <!--<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>-->
+        </configuration>
+      </plugin>
+
+      <!-- Build Helper Maven Plugin for additional test sources and resources -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <!-- Add integration test source directory -->
+          <execution>
+            <id>add-integration-test-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/inttest/java</source>
+              </sources>
+            </configuration>
+          </execution>
+          <!-- Add integration test resources -->
+          <execution>
+            <id>add-integration-test-resources</id>
+            <phase>generate-test-resources</phase>
+            <goals>
+              <goal>add-test-resource</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <filtering>true</filtering>
+                  <directory>src/inttest/resources</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                  <excludes>
+                    <exclude>**/documents/*</exclude>
+                  </excludes>
+                </resource>
+                <resource>
+                  <targetPath>documents</targetPath>
+                  <directory>src/inttest/resources/documents</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <!-- Parse version information -->
+          <execution>
+            <phase>initialize</phase>
+            <id>parse-version</id>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Maven Source Plugin for attaching source JARs -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+              <goal>test-jar</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/sources</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- SonarQube Maven Plugin for code quality analysis -->
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>${sonar-maven-plugin.version}</version>
+      </plugin>
+
+      <!-- JaCoCo Maven Plugin for code coverage reports -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <configuration>
+          <destFile>${jacoco.dataFile}</destFile>
+          <append>true</append>
+          <excludes>
+            <exclude>**/static/features/**/*</exclude>
+            <exclude>**com.steadystate*</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <!-- Prepare the JaCoCo agent -->
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <!-- Generate coverage report -->
+          <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+          <!-- Report after unit tests -->
+          <execution>
+            <id>post-unit-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <dataFile>${jacoco.dataFile}</dataFile>
+              <outputDirectory>${jacoco.reportDir}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Maven Enforcer Plugin for enforcing rules on dependencies and versions -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <!-- Enforce dependency convergence rule -->
+          <execution>
+            <id>enforce-dependency-convergence</id>
+            <configuration>
+              <rules>
+                <dependencyConvergence/>
+              </rules>
+            </configuration>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+          </execution>
+          <!-- Enforce no snapshot dependencies -->
+          <execution>
+            <id>enforce-no-snapshots</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireReleaseDeps>
+                  <message>No Snapshot Dependencies Allowed!</message>
+                  <onlyWhenRelease>true</onlyWhenRelease>
+                  <failWhenParentIsSnapshot>true</failWhenParentIsSnapshot>
+                </requireReleaseDeps>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+    <!-- Plugin management for controlling plugin versions and configurations -->
+    <pluginManagement>
+      <plugins>
+        <!-- Maven Failsafe Plugin for running integration tests -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <configuration>
+            <skipTests>${skipTests}</skipTests>
+            <testSourceDirectory>${project.build.testSourceDirectory}</testSourceDirectory>
+            <includes>
+              <include>**/*IT.java</include>
+            </includes>
+            <excludes>
+              <exclude>**/documents/*</exclude>
+            </excludes>
+            <forkCount>1</forkCount>
+            <reuseForks>true</reuseForks>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <!-- Development profile -->
+    <profile>
+      <id>dev</id>
+      <activation>
+        <!-- This profile is active by default -->
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!-- Skip tests, integration tests, and performance tests -->
+        <skipTests>false</skipTests>
+        <skipITs>true</skipITs>
+        <skipPerfTests>true</skipPerfTests>
+      </properties>
+    </profile>
+
+    <!-- Integration Test profile -->
+    <profile>
+      <id>inttest</id>
+      <properties>
+        <!-- Skip unit tests and performance tests, run integration tests -->
+        <skipTests>true</skipTests>
+        <skipITs>false</skipITs>
+        <skipPerfTests>true</skipPerfTests>
+      </properties>
+    </profile>
+
+    <!-- Performance Test profile -->
+    <profile>
+      <id>perftest</id>
+      <properties>
+        <!-- Skip unit tests and integration tests, run performance tests -->
+        <skipTests>true</skipTests>
+        <skipITs>true</skipITs>
+        <skipPerfTests>false</skipPerfTests>
+      </properties>
+    </profile>
+
+    <!-- Local Deploy profile -->
+    <profile>
+      <id>local-deploy</id>
+      <properties>
+        <!-- Run unit tests, skip integration and performance tests -->
+        <skipTests>false</skipTests>
+        <skipITs>true</skipITs>
+        <skipPerfTests>true</skipPerfTests>
+        <!-- Custom properties for local deployment -->
+        <repositoryName>vop-framework</repositoryName>
+        <repositoryOwner>department-of-veterans-affairs</repositoryOwner>
+      </properties>
+      <build>
+        <plugins>
+          <!-- Maven Deploy Plugin for deploying artifacts to a local repository -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>${maven-deploy-plugin.version}</version>
+            <configuration>
+              <altDeploymentRepository>
+                internal.repo::default::file://${project.build.directory}/mvn-repo
+              </altDeploymentRepository>
+            </configuration>
+          </plugin>
+
+          <!-- Site Maven Plugin for generating and deploying site artifacts -->
+          <plugin>
+            <groupId>com.github.github</groupId>
+            <artifactId>site-maven-plugin</artifactId>
+            <version>${site-maven-plugin.version}</version>
+            <configuration>
+              <message>Maven artifacts for ${project.version}</message>
+              <noJekyll>true</noJekyll>
+              <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+              <branch>refs/heads/mvn-repo</branch>
+              <includes>
+                <include>**/*</include>
+              </includes>
+              <repositoryName>${repositoryName}</repositoryName>
+              <repositoryOwner>${repositoryOwner}</repositoryOwner>
+              <merge>true</merge>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>site</goal>
+                </goals>
+                <phase>deploy</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- OpenAPI Tools Codegen Profile -->
+    <profile>
+      <id>org-openapitools-codegen-parent</id>
+      <activation>
+        <!-- Activate this profile if the OpenAPI specification file exists -->
+        <file>
+          <exists>${basedir}/src/main/resources/openapi/openapi.yml</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <!-- Maven Dependency Plugin for unpacking Swagger UI WebJar -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>download-swagger-ui-webjar</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>unpack</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>org.webjars</groupId>
+                      <artifactId>swagger-ui</artifactId>
+                      <version>${swagger-ui.version}</version>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                  </artifactItems>
+                  <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- OpenAPI Generator Maven Plugin for generating OpenAPI specs -->
+          <plugin>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>${openapi.codegen.version}</version>
+            <executions>
+              <execution>
+                <id>generate-openapi-spec</id>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <configuration>
+                  <inputSpec>${basedir}/src/main/resources/openapi/openapi.yml</inputSpec>
+                  <validateSpec>true</validateSpec>
+                  <generatorName>openapi</generatorName>
+                  <output>${project.build.directory}/classes/META-INF/resources/webjars/swagger-ui
+                  </output>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Maven Replacer Plugin for replacing tokens in Swagger UI files -->
+          <plugin>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>replacer</artifactId>
+            <version>${google.codereplacer.version}</version>
+            <executions>
+              <execution>
+                <id>replace-tokens-swaggerui</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>replace</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <filesToInclude>
+                ${project.build.directory}/classes/META-INF/resources/webjars/swagger-ui/index.html,
+                ${project.build.directory}/classes/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}/index.html
+              </filesToInclude>
+              <replacements>
+                <replacement>
+                  <token>"https://petstore.swagger.io/v2/swagger.json"</token>
+                  <value>"openapi.json"</value>
+                </replacement>
+              </replacements>
+            </configuration>
+          </plugin>
+
+          <!-- Maven Antrun Plugin for copying and deleting Swagger UI files -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-delete-swaggerui</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <copy
+                      todir="${project.build.directory}/classes/META-INF/resources/webjars/swagger-ui"
+                      flatten="true"
+                      overwrite="true"
+                    >
+                      <fileset
+                        dir="${project.build.directory}/classes/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}"/>
+                    </copy>
+                    <delete
+                      dir="${project.build.directory}/classes/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}"
+                      failonerror="false"/>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Build Helper Maven Plugin for adding generated sources -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>add-generated-source</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>add-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                    <source>${project.build.directory}/generated-sources/openapi</source>
+                  </sources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+        <pluginManagement>
+          <plugins>
+            <!-- Lifecycle Mapping for managing plugin executions -->
+            <plugin>
+              <groupId>org.eclipse.m2e</groupId>
+              <artifactId>lifecycle-mapping</artifactId>
+              <version>${lifecycle-mapping.version}</version>
+              <configuration>
+                <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                    <!-- Configuration for OpenAPI Generator Maven Plugin -->
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.openapitools</groupId>
+                        <artifactId>openapi-generator-maven-plugin</artifactId>
+                        <versionRange>[${openapi.codegen.version},)</versionRange>
+                        <goals>
+                          <goal>generate</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <execute/>
+                      </action>
+                    </pluginExecution>
+                    <!-- Configuration for Maven Replacer Plugin -->
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <versionRange>[${google.codereplacer.version},)</versionRange>
+                        <goals>
+                          <goal>replace</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <execute/>
+                      </action>
+                    </pluginExecution>
+                    <!-- Configuration for Maven Antrun Plugin -->
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <versionRange>[${maven-antrun-plugin.version},)</versionRange>
+                        <goals>
+                          <goal>run</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <execute/>
+                      </action>
+                    </pluginExecution>
+                  </pluginExecutions>
+                </lifecycleMappingMetadata>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
+</project>
