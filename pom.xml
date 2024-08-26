@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>vop-framework-reactor</artifactId>
+	<version>1.0.3</version>
+	<groupId>com.wynd.vop.framework</groupId>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+	<description>Reactor POM for VOP Application Framework - Spring Boot and Cloud Enabled</description>
+
+	<modules>
+		<module>vop-framework-parentpom</module>
+		<module>vop-framework-libraries</module>
+		<module>vop-framework-autoconfigure</module>
+	</modules>
+	
+	<repositories>
+		<repository>
+			<id>nexus3</id>
+			<name>VOP Nexus Repository</name>
+			<url>https://nexus.dev.vop.va.gov/repository/maven-public</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus3</id>
+			<name>VOP Nexus Repository</name>
+			<url>https://nexus.dev.vop.va.gov/repository/maven-public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<site-maven-plugin.version>0.12</site-maven-plugin.version>
+		<maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+		
+		<sca-maven-plugin.version>19.2.0</sca-maven-plugin.version>
+		<fortify-merge-input-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-input-filepath>
+		<fortify-merge-output-filepath>${project.basedir}/${project.artifactId}.fpr</fortify-merge-output-filepath>
+		<!-- intentionally using old ant-contrib because newer version doesn't work with maven-antrun-plugin -->
+		<ant-contrib.version>20020829</ant-contrib.version>
+	</properties>
+
+	<!-- TEMPORARY PLUGINS SKIP TO BE REMOVED ONCE NEXUS REPO IS AVAILABLE -->
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven-deploy-plugin.version}</version>
+				<inherited>false</inherited>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>${site-maven-plugin.version}</version>
+				<inherited>false</inherited>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<!--
+			The fortify-sca profile runs the aggregate scan for all modules.
+			If a project believes that the fortify-sca profile requires ANY changes,
+			please consult with the VOP Framework development team.
+			Base Fortify requirements for all project modules are declared in vop-framework-parentpom.
+		-->
+		<profile>
+			<id>fortify-sca</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Don't run tests from SCA - profile should be run as: "mvn install -P fortify-sca" -->
+				<skipTests>true</skipTests>
+				<skipITs>true</skipITs>
+				<skipPerfTests>true</skipPerfTests>
+				<!-- the maven phase to bind fortify-sca -->
+				<fortify.bind.phase>initialize</fortify.bind.phase>
+				<fortify.source.version>8</fortify.source.version>
+			</properties>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>com.fortify.sca.plugins.maven</groupId>
+							<artifactId>sca-maven-plugin</artifactId>
+							<version>${sca-maven-plugin.version}</version>
+                            <configuration>
+                                <source>${fortify.source.version}</source>
+                            </configuration>
+							<dependencies>
+								<!-- Fortify 19.2.0: Force the sca plugin to use an up-to-date version of plexus-utils -->
+								<dependency>
+									<groupId>org.codehaus.plexus</groupId>
+									<artifactId>plexus-utils</artifactId>
+									<version>3.3.0</version>
+								</dependency>
+							</dependencies>
+						</plugin>
+						<plugin>
+							<groupId>ant-contrib</groupId>
+							<artifactId>ant-contrib</artifactId>
+							<version>${ant-contrib.version}</version>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>com.fortify.sca.plugins.maven</groupId>
+						<artifactId>sca-maven-plugin</artifactId>
+						<version>${sca-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>fortify-sca-clean</id>
+								<phase>${fortify.bind.phase}</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+								<configuration>
+									<aggregate>true</aggregate>
+									<debug>true</debug>
+									<verbose>true</verbose>
+								</configuration>
+							</execution>
+							<execution>
+								<id>fortify-sca-translate</id>
+								<phase>${fortify.bind.phase}</phase>
+								<goals>
+									<goal>translate</goal>
+								</goals>
+								<configuration>
+									<!-- run scans against all reactor projects -->
+									<aggregate>true</aggregate>
+									<debug>true</debug>
+									<verbose>true</verbose>
+									<!-- exclude inttest and perftest, as they don't go to prod -->
+									<excludes>**/vop-*-inttest/*,**/vop-*-perftest/*</excludes>
+								</configuration>
+							</execution>
+							<execution>
+								<id>fortify-sca-scan</id>
+								<phase>${fortify.bind.phase}</phase>
+								<goals>
+									<goal>scan</goal>
+								</goals>
+								<configuration>
+									<!-- run scans against all reactor projects -->
+									<aggregate>true</aggregate>
+									<debug>true</debug>
+									<verbose>true</verbose>
+									<!-- exclude inttest and perftest, as they don't go to prod -->
+									<excludes>**/vop-*-inttest/*,**/vop-*-perftest/*</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>fortify-merge</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Don't run tests from SCA - profile should be run as: "mvn install -P fortify-sca" -->
+				<skipTests>true</skipTests>
+				<skipITs>true</skipITs>
+				<skipPerfTests>true</skipPerfTests>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<!-- do not run on child modules, just on reactor -->
+						<inherited>false</inherited>
+						<dependencies>
+							<!-- provides ANT branch tags (if/then/else) -->
+							<dependency>
+								<groupId>ant-contrib</groupId>
+								<artifactId>ant-contrib</artifactId>
+								<version>${ant-contrib.version}</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>fortify-merge</id>
+								<inherited>false</inherited>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<!-- add the ant tasks from ant-contrib -->
+										<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+											<classpath refid="maven.dependency.classpath" />
+										</taskdef>
+										<echo>+++ Executing ANT target for Fortify copy/merge</echo>
+										<if>
+											<available file="${project.build.directory}/fortify/${project.artifactId}-${project.version}.fpr" />
+											<then></then>
+											<else>
+												<fail message="File does not exist: ${project.build.directory}/fortify/${project.artifactId}-${project.version}.fpr" />
+											</else>
+										</if>
+										<echo>+++ Checking file availability of ${fortify-merge-input-filepath}</echo>
+										<if>
+											<available file="${fortify-merge-input-filepath}" />
+											<then>
+												<echo>+++ Found file: ${fortify-merge-input-filepath}</echo>
+												<echo>+++ Executing Fortify merge operation with:</echo>
+												<echo>      FPRUtility -merge</echo>
+												<echo>        -project ${project.build.directory}/fortify/${project.artifactId}-${project.version}.fpr</echo>
+												<echo>        -source ${fortify-merge-input-filepath}</echo>
+												<echo>        -f ${fortify-merge-output-filepath}</echo>
+												<exec executable="FPRUtility">
+													<arg
+														line="-merge -project ${project.build.directory}/fortify/${project.artifactId}-${project.version}.fpr -source ${fortify-merge-input-filepath} -f ${fortify-merge-output-filepath} -debug" />
+												</exec>
+											</then>
+											<else>
+												<echo>+++ Not-found file: ${fortify-merge-input-filepath}</echo>
+												<echo>+++ Executing file copy with:</echo>
+												<echo>      copy</echo>
+												<echo>        ${project.build.directory}/fortify/${project.artifactId}-${project.version}.fpr</echo>
+												<echo>        ${fortify-merge-output-filepath}</echo>
+												<copy file="${project.build.directory}/fortify/${project.artifactId}-${project.version}.fpr"
+													tofile="${fortify-merge-output-filepath}" />
+											</else>
+										</if>
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
