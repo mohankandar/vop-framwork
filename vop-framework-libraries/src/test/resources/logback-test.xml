@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration scan="false" debug="false">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+	<appender name="TestAppender" class="com.wynd.vop.framework.TestAppender">
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.wynd.vop.framework" level="DEBUG">
+		<appender-ref ref="TestAppender" />
+	</logger>
+
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<appender name="JSON_ENCODER" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- Test pattern for Log Masking Filters -->
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="com.wynd.vop.framework.log.logback.VopMaskingFilter">
+				<name>Test_Pattern_0</name>
+				<pattern>\d{3}-\d{3}</pattern>
+				<unmasked>3</unmasked>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>NEUTRAL</OnMatch>
+		</filter>
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<context /> <!--Outputs entries from logback's context -->
+				<pattern>
+					<pattern>
+						{
+						"logType": "%mdc{logType:-applogs}",
+						"severity": "%level",
+						"class": "%logger{40}",
+						"pid": "${PID:-}"
+						}
+					</pattern>
+				</pattern>
+				<threadName />
+				<mdc /> <!-- MDC variables on the Thread will be written as JSON fields -->
+				<provider class="com.wynd.vop.framework.log.logback.VopMaskingMessageProvider">
+					<rules>
+						<rule>
+							<name>credit card</name>
+							<prefix></prefix>
+							<pattern>\d{13,18}</pattern>
+							<suffix></suffix>
+							<unmasked>4</unmasked>
+						</rule>
+						<rule>
+							<name>SSN</name>
+							<prefix></prefix>
+							<pattern>\d{3}-?\d{2}-?\d{4}</pattern>
+							<suffix></suffix>
+							<unmasked>4</unmasked>
+						</rule>
+					</rules>
+				</provider>
+				<logstashMarkers /> <!-- Useful so we can add extra information for specific log lines as Markers -->
+				<arguments /> <!--or through StructuredArguments -->
+				<stackTrace>
+					<!-- limit the size of stack traces, show root cause first -->
+					<throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+						<maxDepthPerThrowable>30</maxDepthPerThrowable>
+						<maxLength>2048</maxLength>
+						<shortenedClassNameLength>40</shortenedClassNameLength>
+						<rootCauseFirst>true</rootCauseFirst>
+					</throwableConverter>
+				</stackTrace>
+			</providers>
+		</encoder>
+	</appender>
+
+	<logger name="com.wynd.vop.framework.log.logback" level="DEBUG" additivity="false">
+		<appender-ref ref="JSON_ENCODER" />
+	</logger>
+
+</configuration>
