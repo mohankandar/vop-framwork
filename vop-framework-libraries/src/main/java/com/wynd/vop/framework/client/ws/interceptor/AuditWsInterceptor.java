@@ -126,8 +126,8 @@ public class AuditWsInterceptor implements ClientInterceptor {
 	 * Handles any exception thrown internally.
 	 * <ul>
 	 * <li>The error is written to the audit log
-	 * <li>The following exception types are re-thrown untouched: BipPartnerRuntimeException, WebServiceClientException.
-	 * <li>All other exception types are converted to BipPartnerRuntimeException which is then thrown.
+	 * <li>The following exception types are re-thrown untouched: VopPartnerRuntimeException, WebServiceClientException.
+	 * <li>All other exception types are converted to VopPartnerRuntimeException which is then thrown.
 	 * </ul>
 	 *
 	 * @param event

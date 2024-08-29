@@ -7,7 +7,7 @@ package com.wynd.vop.framework.constants;
  */
 public final class VopConstants {
 	/*
-	 * BipConstants for use with java.lang.SuppressWarnings to
+	 * VopConstants for use with java.lang.SuppressWarnings to
 	 * ignore unchecked class casting
 	 *
 	 * @see java.lang.SuppressWarnings
@@ -17,7 +17,7 @@ public final class VopConstants {
 	public static final String UNCHECKED = "unchecked";
 
 	/*
-	 * BipConstants specifically useful in exceptions
+	 * VopConstants specifically useful in exceptions
 	 */
 
 	/** Constant for Interceptor Exception banner text */
@@ -28,7 +28,7 @@ public final class VopConstants {
 	public static final String ILLEGALSTATE_STATICS = " is a class for statics. Do not instantiate it.";
 
 	/*
-	 * BipConstants for MIME and Media Types
+	 * VopConstants for MIME and Media Types
 	 */
 
 	/** MIME multipart/mixed */

@@ -79,7 +79,7 @@ public class BaseWsClientConfig {
     @Value("${vop.framework.client.ws.evictExpiredConnections:true}")
     private boolean evictExpiredConnections;
     
-    //Note: The following values differ from their BipRestAutoConfiguration counterpart. However,
+    //Note: The following values differ from their VopRestAutoConfiguration counterpart. However,
     // we are leaving them as is to match the current Apache Http Client defaults.
     @Value("${vop.framework.client.ws.maxTotalPool:20}")
     private int maxTotalPool = 20;

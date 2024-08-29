@@ -24,10 +24,10 @@ public class VopLogger extends VopBaseLogger {
 	}
 
 	/**
-	 * Get an BipLogger.
+	 * Get an VopLogger.
 	 *
 	 * @param logger an org.slf4j.Logger.Logger
-	 * @return BipLogger
+	 * @return VopLogger
 	 */
 	public static final VopLogger getLogger(org.slf4j.Logger logger) {
 		return new VopLogger(logger);

@@ -2,10 +2,10 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
 	<soapenv:Body>
 		<ns2:findAddressInquiry
-			xmlns:ns2="http://addressupdate.services.ebenefits.vba.va.gov/">
-			<lastName>YOUNG</lastName>
-			<ssn>796022234</ssn>
-			<dob>07/08/1964</dob>
+			xmlns:ns2="http://addressdoctor.services.com/">
+			<lastName>KIM</lastName>
+			<ssn>663981234</ssn>
+			<dob>01/01/1984</dob>
 		</ns2:findAddressInquiry>
 	</soapenv:Body>
 </soapenv:Envelope>

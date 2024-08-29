@@ -39,7 +39,7 @@ public class VopBanner {
 	 *
 	 * @param bannerText the banner text
 	 * @param level the log level reported by the banner
-	 * @return BipBanner
+	 * @return VopBanner
 	 */
 	public static VopBanner newBanner(final String bannerText, final Level level) {
 		return new VopBanner(bannerText, level);

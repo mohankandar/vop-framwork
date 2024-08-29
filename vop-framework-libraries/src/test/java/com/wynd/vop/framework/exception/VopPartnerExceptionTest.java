@@ -13,7 +13,7 @@ public class VopPartnerExceptionTest {
 	private static final MessageKey TEST_KEY = MessageKeys.NO_KEY;
 
 	@Test
-	public void initializeBipPartnerExceptionTest() {
+	public void initializeVopPartnerExceptionTest() {
 		assertNotNull(new VopPartnerException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST));
 		assertNotNull(
 				new VopPartnerException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST,

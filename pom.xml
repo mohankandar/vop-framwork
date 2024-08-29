@@ -21,14 +21,14 @@
 		<repository>
 			<id>nexus3</id>
 			<name>VOP Nexus Repository</name>
-			<url>https://nexus.dev.vop.va.gov/repository/maven-public</url>
+			<url>https://nexus.domain.com/repository/maven-public</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus3</id>
 			<name>VOP Nexus Repository</name>
-			<url>https://nexus.dev.vop.va.gov/repository/maven-public</url>
+			<url>https://nexus.domain.com/repository/maven-public</url>
 		</pluginRepository>
 	</pluginRepositories>
 

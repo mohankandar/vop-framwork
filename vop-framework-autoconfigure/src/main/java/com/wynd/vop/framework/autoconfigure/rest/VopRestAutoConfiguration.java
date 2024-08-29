@@ -77,7 +77,7 @@ public class VopRestAutoConfiguration {
 	}
 
 	/**
-	 * Bip rest global exception handler.
+	 * Vop rest global exception handler.
 	 *
 	 * @return the vop rest global exception handler
 	 */

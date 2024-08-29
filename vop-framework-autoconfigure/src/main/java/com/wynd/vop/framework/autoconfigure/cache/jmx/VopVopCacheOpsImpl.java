@@ -73,7 +73,7 @@ public class VopVopCacheOpsImpl implements VopCacheOpsMBean {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.wynd.vop.framework.cache.autoconfigure.BipCacheOpsMBean#clearAllCaches()
+	 * @see com.wynd.vop.framework.cache.autoconfigure.VopCacheOpsMBean#clearAllCaches()
 	 */
 	@ManagedOperation(description = "Clear all cache entries known to the spring cache manager.")
 	@Override
@@ -87,7 +87,7 @@ public class VopVopCacheOpsImpl implements VopCacheOpsMBean {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.wynd.vop.framework.cache.autoconfigure.jmx.BipCacheOpsMBean#viewCacheConfigs()
+	 * @see com.wynd.vop.framework.cache.autoconfigure.jmx.VopCacheOpsMBean#viewCacheConfigs()
 	 */
 	@ManagedOperation(
 			description = "INFO logging of default and individual cache configurations from the current spring source (e.g. application yaml).")
@@ -131,7 +131,7 @@ public class VopVopCacheOpsImpl implements VopCacheOpsMBean {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.wynd.vop.framework.cache.autoconfigure.jmx.BipCacheOpsMBean#logCurrentJedisConnectionFactoryFields()
+	 * @see com.wynd.vop.framework.cache.autoconfigure.jmx.VopCacheOpsMBean#logCurrentJedisConnectionFactoryFields()
 	 */
 	@Override
 	@ManagedOperation(
@@ -202,7 +202,7 @@ public class VopVopCacheOpsImpl implements VopCacheOpsMBean {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.wynd.vop.framework.cache.autoconfigure.jmx.BipCacheOpsMBean#logCurrentCacheManagerFields()
+	 * @see com.wynd.vop.framework.cache.autoconfigure.jmx.VopCacheOpsMBean#logCurrentCacheManagerFields()
 	 */
 	@ManagedOperation(description = "INFO logs of the CacheManager field values from the current bean in the application context.")
 	@Override

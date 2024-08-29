@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This class wraps the SLF4J logger to add logging enhancements for the platform.
  * <p>
- * If a future upgrade of SLF4J changes the Logger interface, changes will be required in the BipLogger class.
+ * If a future upgrade of SLF4J changes the Logger interface, changes will be required in the VopLogger class.
  *
 
  */
@@ -24,7 +24,7 @@ public final class VopLoggerFactory {
 	 * Gets a SLF4J-compliant logger, enhanced for applications, for the specified class.
 	 *
 	 * @param clazz the Class for which logging is desired
-	 * @return BipLogger
+	 * @return VopLogger
 	 * @see org.slf4j.LoggerFactory#getLogger(Class)
 	 */
 	public static final VopLogger getLogger(Class<?> clazz) {
@@ -35,7 +35,7 @@ public final class VopLoggerFactory {
 	 * Gets a SLF4J-compliant logger, enhanced for applications, for the specified name.
 	 *
 	 * @param name the name under which logging is desired
-	 * @return BipLogger
+	 * @return VopLogger
 	 * @see org.slf4j.LoggerFactory#getLogger(String)
 	 */
 	public static final VopLogger getLogger(String name) {
@@ -43,7 +43,7 @@ public final class VopLoggerFactory {
 	}
 
 	/**
-	 * Get the implementation of the logger factory that is bound to SLF4J, that serves as the basis for BipLoggerFactory.
+	 * Get the implementation of the logger factory that is bound to SLF4J, that serves as the basis for VopLoggerFactory.
 	 *
 	 * @return ILoggerFactory an instance of the bound factory implementation
 	 * @see org.slf4j.LoggerFactory#getILoggerFactory()

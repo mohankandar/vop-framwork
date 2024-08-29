@@ -3,7 +3,7 @@ package com.wynd.vop.framework.config;
 import com.wynd.vop.framework.constants.VopConstants;
 
 /**
- * BipConstants to store the profiles commonly used in the applications.
+ * VopConstants to store the profiles commonly used in the applications.
  *
  */
 public final class CommonSpringProfiles {

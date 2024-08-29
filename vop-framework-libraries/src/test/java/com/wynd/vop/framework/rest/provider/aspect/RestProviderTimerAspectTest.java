@@ -21,9 +21,9 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class RestProviderTimerAspectTest extends AbstractBaseLogTester {
 
-	/** Underlying implementation of BipLogger */
+	/** Underlying implementation of VopLogger */
 	private VopLogger AspectLoggingLOG = super.getLogger(RestProviderTimerAspectTest.class);
-	/** Underlying implementation of BipLogger */
+	/** Underlying implementation of VopLogger */
 	private VopLogger AspectLoggingTestLOG = super.getLogger(RestProviderTimerAspectTest.class);
 
 	@Mock

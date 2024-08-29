@@ -47,7 +47,7 @@ public final class ExceptionHandlingUtils {
 	}
 
 	/**
-	 * Resolve the throwable to an {@link VopRuntimeException} (or subclass of BipRuntimeException).
+	 * Resolve the throwable to an {@link VopRuntimeException} (or subclass of VopRuntimeException).
 	 *
 	 * @param messageKey the message key to use for this type of exception
 	 * @param throwable the throwable
@@ -61,13 +61,13 @@ public final class ExceptionHandlingUtils {
 
 		if (VopRuntimeException.class.isAssignableFrom(throwable.getClass())) {
 			// have to cast so the "Throwable throwable" variable can be returned as-is
-			resolvedRuntimeException = castToBipRuntimeException(throwable);
+			resolvedRuntimeException = castToVopRuntimeException(throwable);
 
 		} else if (VopExceptionExtender.class.isAssignableFrom(throwable.getClass())) {
-			resolvedRuntimeException = convertFromBipExceptionExtender(throwable);
+			resolvedRuntimeException = convertFromVopExceptionExtender(throwable);
 
 		} else {
-			// make a new BipRuntimeException from the non-VOP throwable
+			// make a new VopRuntimeException from the non-VOP throwable
 			resolvedRuntimeException =
 					new VopRuntimeException(messageKey, MessageSeverity.FATAL, HttpStatus.INTERNAL_SERVER_ERROR, throwable);
 		}
@@ -75,7 +75,7 @@ public final class ExceptionHandlingUtils {
 		return resolvedRuntimeException;
 	}
 
-	static VopRuntimeException convertFromBipExceptionExtender(final Throwable throwable) {
+	static VopRuntimeException convertFromVopExceptionExtender(final Throwable throwable) {
 		VopRuntimeException resolvedRuntimeException = null;
 		try {
 			// cast "Throwable throwable" variable to the VOP exception interface
@@ -96,7 +96,7 @@ public final class ExceptionHandlingUtils {
 		return resolvedRuntimeException;
 	}
 
-	static VopRuntimeException castToBipRuntimeException(final Throwable throwable) { // method added for testability
+	static VopRuntimeException castToVopRuntimeException(final Throwable throwable) { // method added for testability
 		VopRuntimeException resolvedRuntimeException = null;
 		try {
 			resolvedRuntimeException = (VopRuntimeException) throwable;

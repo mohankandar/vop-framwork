@@ -25,7 +25,7 @@ public class VopPartnerException extends VopException {
 	 * Examples could include scenarios like "requested data not found", "input data malformed",
 	 * etc.
 	 *
-	 * @see VopException#BipException(String, String, MessageSeverity, HttpStatus)
+	 * @see VopException#VopException(String, String, MessageSeverity, HttpStatus)
 	 *
 	 * @param key - the consumer-facing key that can uniquely identify the nature of the exception
 	 * @param severity - the severity of the event: FATAL (500 series), ERROR (400 series), WARN (200 series), or INFO/DEBUG/TRACE
@@ -43,7 +43,7 @@ public class VopPartnerException extends VopException {
 	 * Examples could include scenarios like "requested data not found", "input data malformed",
 	 * etc.
 	 *
-	 * @see VopException#BipException(String, String, MessageSeverity, HttpStatus, Throwable)
+	 * @see VopException#VopException(String, String, MessageSeverity, HttpStatus, Throwable)
 	 *
 	 * @param key - the consumer-facing key that can uniquely identify the nature of the exception
 	 * @param severity - the severity of the event: FATAL (500 series), ERROR (400 series), WARN (200 series), or INFO/DEBUG/TRACE

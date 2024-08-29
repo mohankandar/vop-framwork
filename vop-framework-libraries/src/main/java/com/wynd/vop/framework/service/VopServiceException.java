@@ -17,7 +17,7 @@ public class VopServiceException extends VopRuntimeException {
 	private static final long serialVersionUID = -6590361959617339905L;
 
 	/**
-	 * Constructs a new BipServiceException with the specified detail key, message, severity, and status.
+	 * Constructs a new VopServiceException with the specified detail key, message, severity, and status.
 	 * The cause is not initialized, and may subsequently be initialized by
 	 * a call to {@link #initCause}.
 	 *
@@ -34,7 +34,7 @@ public class VopServiceException extends VopRuntimeException {
 	}
 
 	/**
-	 * Constructs a new BipServiceException with the specified detail key, message, severity, status, and cause.
+	 * Constructs a new VopServiceException with the specified detail key, message, severity, status, and cause.
 	 *
 	 * @see RuntimeException#RuntimeException(String, Throwable)
 	 *

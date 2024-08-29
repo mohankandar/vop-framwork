@@ -108,9 +108,9 @@ public class ExceptionHandlingUtilsTest {
 	}
 
 	@Test
-	public void testConvertFromBipExceptionExtender() {
+	public void testConvertFromVopExceptionExtender() {
 		VopRuntimeException resolvedRuntimeException = ExceptionHandlingUtils
-				.convertFromBipExceptionExtender(new VopRuntimeException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST));
+				.convertFromVopExceptionExtender(new VopRuntimeException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST));
 		assertTrue(resolvedRuntimeException.getExceptionData().getKey().equals(TEST_KEY.getKey()));
 		assertTrue(resolvedRuntimeException.getMessage().equals(TEST_KEY_MESSAGE));
 		assertTrue(resolvedRuntimeException.getExceptionData().getSeverity().equals(MessageSeverity.ERROR));
@@ -118,9 +118,9 @@ public class ExceptionHandlingUtilsTest {
 	}
 
 	@Test
-	public void testConvertFromBipExceptionExtenderWithClassCastException() {
+	public void testConvertFromVopExceptionExtenderWithClassCastException() {
 		try {
-			ExceptionHandlingUtils.convertFromBipExceptionExtender(new RuntimeException());
+			ExceptionHandlingUtils.convertFromVopExceptionExtender(new RuntimeException());
 		} catch (VopRuntimeException e) {
 			assertTrue(e.getExceptionData().getKey().equals(MessageKeys.VOP_EXCEPTION_HANDLER_ERROR_VALUES.getKey()));
 			assertTrue(e.getMessage().equals(MessageKeys.VOP_EXCEPTION_HANDLER_ERROR_VALUES.getMessage((String[]) null)));
@@ -130,13 +130,13 @@ public class ExceptionHandlingUtilsTest {
 	}
 
 	@Test
-	public void testCastToBipRuntimeException() {
+	public void testCastToVopRuntimeException() {
 		try {
-			ExceptionHandlingUtils.castToBipRuntimeException(
+			ExceptionHandlingUtils.castToVopRuntimeException(
 					new VopRuntimeException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST));
 		} catch (VopRuntimeException e) {
 			assertTrue(e.getExceptionData().getKey().equals(""));
-			String msg = "Could not instantiate BipRuntimeException using values from throwable java.lang.RuntimeException";
+			String msg = "Could not instantiate VopRuntimeException using values from throwable java.lang.RuntimeException";
 			assertTrue(e.getMessage().equals(msg));
 			assertTrue(e.getExceptionData().getSeverity().equals(MessageSeverity.FATAL));
 			assertTrue(e.getExceptionData().getStatus().equals(HttpStatus.INTERNAL_SERVER_ERROR));
@@ -144,9 +144,9 @@ public class ExceptionHandlingUtilsTest {
 	}
 
 	@Test
-	public void testCastToBipRuntimeExceptionCatchBlock() {
+	public void testCastToVopRuntimeExceptionCatchBlock() {
 		try {
-			ExceptionHandlingUtils.castToBipRuntimeException(new Exception());
+			ExceptionHandlingUtils.castToVopRuntimeException(new Exception());
 		} catch (VopRuntimeException e) {
 			assertTrue(e.getExceptionData().getMessageKey().equals(MessageKeys.VOP_EXCEPTION_HANDLER_ERROR_CAST));
 			String msg = MessageKeys.VOP_EXCEPTION_HANDLER_ERROR_CAST.getMessage((String[]) null);
@@ -157,9 +157,9 @@ public class ExceptionHandlingUtilsTest {
 	}
 
 	@Test
-	public void testCastToBipRuntimeExceptionExtenderWithClassCastException() {
+	public void testCastToVopRuntimeExceptionExtenderWithClassCastException() {
 		try {
-			ExceptionHandlingUtils.convertFromBipExceptionExtender(new RuntimeException());
+			ExceptionHandlingUtils.convertFromVopExceptionExtender(new RuntimeException());
 		} catch (VopRuntimeException e) {
 			assertTrue(e.getExceptionData().getKey().equals(MessageKeys.VOP_EXCEPTION_HANDLER_ERROR_VALUES.getKey()));
 			assertTrue(e.getMessage().equals(MessageKeys.VOP_EXCEPTION_HANDLER_ERROR_VALUES.getMessage((String[]) null)));

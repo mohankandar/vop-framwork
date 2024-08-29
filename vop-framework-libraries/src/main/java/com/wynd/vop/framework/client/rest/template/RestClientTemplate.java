@@ -18,8 +18,8 @@ import org.springframework.web.client.RestTemplate;
  * </ul>
  * This template is not appropriate as-is for most inter-service and external operations,
  * and would need to be configured with an appropriate interceptor, or be extended.
- * For an example of a JWT-based inter-service client, see {@code BipRestAutoConfiguration.restClientTemplate()}
- * and its use of {@code BipRestAutoConfiguration.tokenClientHttpRequestInterceptor()}.
+ * For an example of a JWT-based inter-service client, see {@code VopRestAutoConfiguration.restClientTemplate()}
+ * and its use of {@code VopRestAutoConfiguration.tokenClientHttpRequestInterceptor()}.
  */
 public class RestClientTemplate {
 
@@ -39,8 +39,8 @@ public class RestClientTemplate {
 	 * </ul>
 	 * This template is not appropriate as-is for most inter-service and external operations,
 	 * and would need to be configured with an appropriate interceptor, or be extended.
-	 * For an example of a JWT-based inter-service client, see {@code BipRestAutoConfiguration.restClientTemplate()}
-	 * and its use of {@code BipRestAutoConfiguration.tokenClientHttpRequestInterceptor()}.
+	 * For an example of a JWT-based inter-service client, see {@code VopRestAutoConfiguration.restClientTemplate()}
+	 * and its use of {@code VopRestAutoConfiguration.tokenClientHttpRequestInterceptor()}.
 	 */
 	public RestClientTemplate() {
 		this.restTemplate = new RestTemplate();

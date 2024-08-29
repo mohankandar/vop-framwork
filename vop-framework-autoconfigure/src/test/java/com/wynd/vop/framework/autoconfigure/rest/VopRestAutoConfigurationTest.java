@@ -70,7 +70,7 @@ public class VopRestAutoConfigurationTest {
 		try {
 			context.refresh();
 			vopRestAutoConfiguration.restClientTemplate();
-			fail("BipRestAutoConfiguration should have thrown IllegalStateException or BeansException");
+			fail("VopRestAutoConfiguration should have thrown IllegalStateException or BeansException");
 		} catch (Exception e) {
 			assertTrue(BeansException.class.isAssignableFrom(e.getClass()));
 		} finally {

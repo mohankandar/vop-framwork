@@ -482,7 +482,7 @@ public class VopRestGlobalExceptionHandlerTest extends AbstractBaseLogTester {
 	}
 
 	@Test
-	public void handleBipRuntimeExceptionJsonMappingExceptionTest() {
+	public void handleVopRuntimeExceptionJsonMappingExceptionTest() {
 		HttpServletRequest req = mock(HttpServletRequest.class);
 
 		VopRuntimeException vopRuntimeException = new VopRuntimeException(MessageKeys.NO_KEY, MessageSeverity.ERROR,
@@ -518,7 +518,7 @@ public class VopRestGlobalExceptionHandlerTest extends AbstractBaseLogTester {
 	}
 	
 	@Test
-	public void handleBipExceptionJsonMappingExceptionTest() {
+	public void handleVopExceptionJsonMappingExceptionTest() {
 		HttpServletRequest req = mock(HttpServletRequest.class);
 
 		VopException vopException = new VopException(MessageKeys.NO_KEY, MessageSeverity.ERROR,
@@ -617,12 +617,12 @@ public class VopRestGlobalExceptionHandlerTest extends AbstractBaseLogTester {
 	}
 
 	@Test
-	public void handleBipRuntimeExceptionTest() {
+	public void handleVopRuntimeExceptionTest() {
 		HttpServletRequest req = mock(HttpServletRequest.class);
 		VopRuntimeException ex = new VopRuntimeException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST);
 
 		ResponseEntity<Object> response = ReflectionTestUtils.invokeMethod(vopRestGlobalExceptionHandler,
-				"handleBipRuntimeException", req, ex);
+				"handleVopRuntimeException", req, ex);
 		assertTrue(response.getStatusCode().equals(HttpStatus.BAD_REQUEST));
 	}
 
@@ -667,21 +667,21 @@ public class VopRestGlobalExceptionHandlerTest extends AbstractBaseLogTester {
 	}
 
 	@Test
-	public void handleBipPartnerRuntimeExceptionTest() {
+	public void handleVopPartnerRuntimeExceptionTest() {
 		HttpServletRequest req = mock(HttpServletRequest.class);
 		VopPartnerRuntimeException ex = new VopPartnerRuntimeException(TEST_KEY, MessageSeverity.ERROR,
 				HttpStatus.BAD_REQUEST);
 		ResponseEntity<Object> response = ReflectionTestUtils.invokeMethod(vopRestGlobalExceptionHandler,
-				"handleBipPartnerRuntimeException", req, ex);
+				"handleVopPartnerRuntimeException", req, ex);
 		assertTrue(response.getStatusCode().equals(HttpStatus.BAD_REQUEST));
 	}
 
 	@Test
-	public void handleBipPartnerCheckedExceptionTest() {
+	public void handleVopPartnerCheckedExceptionTest() {
 		HttpServletRequest req = mock(HttpServletRequest.class);
 		VopPartnerException ex = new VopPartnerException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST);
 		ResponseEntity<Object> response = ReflectionTestUtils.invokeMethod(vopRestGlobalExceptionHandler,
-				"handleBipPartnerCheckedException", req, ex);
+				"handleVopPartnerCheckedException", req, ex);
 		assertTrue(response.getStatusCode().equals(HttpStatus.BAD_REQUEST));
 	}
 

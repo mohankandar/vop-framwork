@@ -165,14 +165,14 @@ public class VopLoggerTest extends AbstractBaseLogTester {
 		int captureCount = 0;
 
 		// if ((mdcReserveLength + messageLength + stackTraceLength) > MAX_TOTAL_LOG_LEN) {
-		// if (messageLength >= com.wynd.vop.framework.log.BipBaseLogger.MAX_MSG_LENGTH) {
+		// if (messageLength >= com.wynd.vop.framework.log.VopBaseLogger.MAX_MSG_LENGTH) {
 		// String[] splitMessages = ReflectionTestUtils.invokeMethod(logger, "splitMessages", message);
 		// captureCount = splitMessages.length;
 		// } else {
 		// captureCount = 1;
 		// }
 		//
-		// if (stackTraceLength >= com.wynd.vop.framework.log.BipBaseLogger.MAX_STACK_TRACE_TEXT_LENGTH) {
+		// if (stackTraceLength >= com.wynd.vop.framework.log.VopBaseLogger.MAX_STACK_TRACE_TEXT_LENGTH) {
 		// String[] splitstackTrace = ReflectionTestUtils.invokeMethod(logger, "splitStackTraceText", stackTrace);
 		// captureCount = captureCount + splitstackTrace.length;
 		// } else if (stackTraceLength != 0) {

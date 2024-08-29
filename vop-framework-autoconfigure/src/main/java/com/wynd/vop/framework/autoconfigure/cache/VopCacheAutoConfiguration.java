@@ -82,7 +82,7 @@ public class VopCacheAutoConfiguration {
 	/**
 	 * JMX MBean that exposes cache management operations.
 	 *
-	 * @return BipCacheOpsMBean - the management bean
+	 * @return VopCacheOpsMBean - the management bean
 	 */
 	@Bean
 	public VopCacheOpsMBean vopCacheOpsMBean() {

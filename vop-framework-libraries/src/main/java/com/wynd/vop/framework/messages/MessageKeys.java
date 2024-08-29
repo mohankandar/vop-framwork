@@ -5,7 +5,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import java.util.Locale;
 
 /**
- * A message @PropertySource for Service Bip*Exception and *Message list.
+ * A message @PropertySource for Service Vop*Exception and *Message list.
  * <p>
  * This class derives its values from the framework-messages.properties file.
  * that is added to the spring context as an {@code @PropertySource}.
@@ -27,7 +27,7 @@ public enum MessageKeys implements MessageKey {
 	NO_KEY("NO_KEY", "Unknown, no key provided."),
 	/** Key for warning messages; {0} = warning message */
 	WARN_KEY("WARN", ""),
-	/** Key for propagating exceptions as BipExceptionExtender; {0} = exception message */
+	/** Key for propagating exceptions as VopExceptionExtender; {0} = exception message */
 	PROPAGATE("PROPAGATE", ""),
 
 	/** Problem with reflection; {0} = class simple name */
@@ -53,10 +53,10 @@ public enum MessageKeys implements MessageKey {
 	VOP_GLOBAL_GENERAL_EXCEPTION("vop.framework.global.general.exception", "Unexpected exception."),
 	/** Exception handler cast failed; {0} = class name */
 	VOP_EXCEPTION_HANDLER_ERROR_VALUES("vop.framework.exception.handler.error.values.",
-			"Could not instantiate BipRuntimeException."),
+			"Could not instantiate VopRuntimeException."),
 	/** Exception handler cast failed; {0} = class name */
 	VOP_EXCEPTION_HANDLER_ERROR_CAST("vop.framework.exception.handler.error.cast",
-			"Could not cast throwable to BipRuntimeException."),
+			"Could not cast throwable to VopRuntimeException."),
 	/** MethodArgumentNotValidException; {0} = "field" or "object"; {1} = codes; {2} = default message */
 	VOP_GLOBAL_VALIDATOR_METHOD_ARGUMENT_NOT_VALID("vop.framework.global.validator.method.argument.not.valid", "Argument not valid."),
 	/** HttpClientErrorException; {0} = http status code; {1} = exception message */

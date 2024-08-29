@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 @RunWith(MockitoJUnitRunner.class)
 public class PerformanceLogMethodInterceptorTest extends AbstractBaseLogTester {
 
-	/** The underlying logger of BipLogger */
+	/** The underlying logger of VopLogger */
 	private VopLogger LOG = super.getLogger(PerformanceLogMethodInterceptorTest.class);
 
 	@Mock

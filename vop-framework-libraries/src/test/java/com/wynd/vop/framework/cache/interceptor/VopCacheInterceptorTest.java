@@ -102,7 +102,7 @@ public class VopCacheInterceptorTest {
 	}
 
 	@Test
-	public final void testBipCacheInterceptor() {
+	public final void testVopCacheInterceptor() {
 		assertNotNull(new CacheInterceptor(false));
 	}
 

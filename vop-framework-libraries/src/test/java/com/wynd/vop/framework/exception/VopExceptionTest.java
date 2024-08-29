@@ -17,7 +17,7 @@ public class VopExceptionTest {
 	private static final MessageKey TEST_KEY = MessageKeys.NO_KEY;
 
 	@Test
-	public void initializeBipExceptionTest() {
+	public void initializeVopExceptionTest() {
 		assertNotNull(new VopException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST));
 		assertNotNull(new VopException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST, new Exception("wrapped message")));
 		assertNotNull(new VopException(null, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST, new Exception("wrapped message")));

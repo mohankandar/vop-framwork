@@ -57,7 +57,7 @@ public class VopFeignAutoConfigurationTest {
 	}
 
 	/**
-	 * Test of feignCustomErrorDecoder method, of class BipFeignAutoConfiguration.
+	 * Test of feignCustomErrorDecoder method, of class VopFeignAutoConfiguration.
 	 */
 	@Test
 	public void testFeignErrorDecoder() {
@@ -67,7 +67,7 @@ public class VopFeignAutoConfigurationTest {
 	}
 	
 	/**
-	 * Test of feignLoggerLevel method, of class BipFeignAutoConfiguration.
+	 * Test of feignLoggerLevel method, of class VopFeignAutoConfiguration.
 	 */
 	@Test
 	public void testFeignLoggerLevel() {
@@ -77,7 +77,7 @@ public class VopFeignAutoConfigurationTest {
 	}
 	
 	/**
-	 * Test of requestOptions method, of class BipFeignAutoConfiguration.
+	 * Test of requestOptions method, of class VopFeignAutoConfiguration.
 	 */
 	@Test
 	public void testFeignRequestOptions() {

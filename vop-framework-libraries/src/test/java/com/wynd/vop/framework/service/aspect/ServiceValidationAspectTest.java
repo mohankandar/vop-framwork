@@ -108,7 +108,7 @@ public class ServiceValidationAspectTest {
 					method);
 		} catch (VopRuntimeException e) {
 			e.printStackTrace();
-			fail("BipRuntimeException should not be thrown when validator class does not exist.");
+			fail("VopRuntimeException should not be thrown when validator class does not exist.");
 		}
 	}
 
@@ -213,7 +213,7 @@ public class ServiceValidationAspectTest {
 			fail("unable to invoke method named testMethod");
 		} catch (VopRuntimeException e) {
 			e.printStackTrace();
-			fail("BipRuntimeException should not be thrown when validator class does not exist.");
+			fail("VopRuntimeException should not be thrown when validator class does not exist.");
 		}
 	}
 
@@ -246,7 +246,7 @@ public class ServiceValidationAspectTest {
 			fail("unable to find method named testMethod");
 		} catch (VopRuntimeException e) {
 			e.printStackTrace();
-			fail("BipRuntimeException should not be thrown when validator class does not exist.");
+			fail("VopRuntimeException should not be thrown when validator class does not exist.");
 		}
 	}
 

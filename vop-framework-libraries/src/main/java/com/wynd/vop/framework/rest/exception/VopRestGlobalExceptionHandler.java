@@ -218,7 +218,7 @@ public class VopRestGlobalExceptionHandler extends BaseHttpProviderPointcuts {
 	/**
 	 * Standard exception handler for any exception that implements {@link VopExceptionExtender}.
 	 *
-	 * @param ex - the exception that implements BipExceptionExtender
+	 * @param ex - the exception that implements VopExceptionExtender
 	 * @param httpResponseStatus - the status to put on the HTTP Response Entity.
 	 * @return ResponseEntity - the HTTP Response Entity
 	 */
@@ -286,7 +286,7 @@ public class VopRestGlobalExceptionHandler extends BaseHttpProviderPointcuts {
 	// 400
 
 	/**
-	 * Handle BipPartnerRuntimeException.
+	 * Handle VopPartnerRuntimeException.
 	 *
 	 * @param req the req
 	 * @param ex the ex
@@ -294,14 +294,14 @@ public class VopRestGlobalExceptionHandler extends BaseHttpProviderPointcuts {
 	 */
 	@ExceptionHandler(value = VopPartnerRuntimeException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public final ResponseEntity<Object> handleBipPartnerRuntimeException(final HttpServletRequest req,
+	public final ResponseEntity<Object> handleVopPartnerRuntimeException(final HttpServletRequest req,
 			final VopPartnerRuntimeException ex) {
 		return standardHandler(ex, HttpStatus.BAD_REQUEST);
 	}
 
 
 	/**
-	 * Handle BipPartnerException.
+	 * Handle VopPartnerException.
 	 *
 	 * @param req the req
 	 * @param ex the ex
@@ -309,7 +309,7 @@ public class VopRestGlobalExceptionHandler extends BaseHttpProviderPointcuts {
 	 */
 	@ExceptionHandler(value = VopPartnerException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public final ResponseEntity<Object> handleBipPartnerCheckedException(final HttpServletRequest req, final VopPartnerException ex) {
+	public final ResponseEntity<Object> handleVopPartnerCheckedException(final HttpServletRequest req, final VopPartnerException ex) {
 		return standardHandler(ex, HttpStatus.BAD_REQUEST);
 	}
 
@@ -629,7 +629,7 @@ public class VopRestGlobalExceptionHandler extends BaseHttpProviderPointcuts {
 	 * @return the response entity
 	 */
 	@ExceptionHandler(value = VopRuntimeException.class)
-	public final ResponseEntity<Object> handleBipRuntimeException(final HttpServletRequest req, final VopRuntimeException ex) {
+	public final ResponseEntity<Object> handleVopRuntimeException(final HttpServletRequest req, final VopRuntimeException ex) {
 		return standardHandler(ex, ex.getExceptionData().getStatus());
 	}
 

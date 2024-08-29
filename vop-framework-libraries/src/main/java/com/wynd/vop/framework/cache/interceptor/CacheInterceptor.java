@@ -33,7 +33,7 @@ public class CacheInterceptor extends org.springframework.cache.interceptor.Cach
 	/** Class logger */
 	private static final VopLogger LOGGER = VopLoggerFactory.getLogger(CacheInterceptor.class);
 	/** The advice logging name for this interceptor */
-	private static final String ADVICE_NAME = "invokeBipCacheInterceptor";
+	private static final String ADVICE_NAME = "invokeVopCacheInterceptor";
 	/** The activity name for this interceptor */
 	private static final String ACTIVITY = "cacheInvoke";
 
@@ -45,7 +45,7 @@ public class CacheInterceptor extends org.springframework.cache.interceptor.Cach
 	transient BaseAsyncAudit baseAsyncAudit;
 
 	/**
-	 * Instantiate an BipCacheInterceptor to audit cache GET operations.
+	 * Instantiate an VopCacheInterceptor to audit cache GET operations.
 	 * @param allowNullReturn
 	 */
 	public CacheInterceptor(boolean allowNullReturn) {

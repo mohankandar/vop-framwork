@@ -18,7 +18,7 @@ public class VopFeignRuntimeExceptionTest {
 	private static final MessageSeverity TEST_SEVERITY = MessageSeverity.ERROR;
 
 	@Test
-	public void instantiateBipFeignRuntimeExceptionTest() throws Exception {
+	public void instantiateVopFeignRuntimeExceptionTest() throws Exception {
 		VopFeignRuntimeException vopFeignRuntimeException =
 				new VopFeignRuntimeException(TEST_KEY, TEST_SEVERITY, TEST_HTTP_STATUS);
 
@@ -29,7 +29,7 @@ public class VopFeignRuntimeExceptionTest {
 	}
 
 	@Test
-	public void instantiateUsingOtherConstructorBipFeignRuntimeExceptionTest() throws Exception {
+	public void instantiateUsingOtherConstructorVopFeignRuntimeExceptionTest() throws Exception {
 		VopFeignRuntimeException vopFeignRuntimeException =
 				new VopFeignRuntimeException(TEST_KEY, TEST_SEVERITY,
 						TEST_HTTP_STATUS, new Exception("test wrapped error"));

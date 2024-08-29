@@ -11,7 +11,7 @@ package com.wynd.vop.framework.exception;
  * <table style="border-collapse:collapse;">
  * <tr>
  * <td></td>
- * <td>{@code public BipYourException(String key, String message, MessageSeverity severity, HttpStatus status)}</td>
+ * <td>{@code public VopYourException(String key, String message, MessageSeverity severity, HttpStatus status)}</td>
  * </tr>
  * <tr>
  * <td>and</td>
@@ -19,7 +19,7 @@ package com.wynd.vop.framework.exception;
  * </tr>
  * <tr>
  * <td></td>
- * <td>{@code public BipYourException(String key, String message, MessageSeverity severity, HttpStatus status, Throwable cause)}</td>
+ * <td>{@code public VopYourException(String key, String message, MessageSeverity severity, HttpStatus status, Throwable cause)}</td>
  * </tr>
  * </table>
  *

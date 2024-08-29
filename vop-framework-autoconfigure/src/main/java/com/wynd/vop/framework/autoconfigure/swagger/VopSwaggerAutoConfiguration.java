@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * BipSwaggerAutoConfiguration that adds Spring MVC configuration to enable
+ * VopSwaggerAutoConfiguration that adds Spring MVC configuration to enable
  * Swagger UI access
  *
  */

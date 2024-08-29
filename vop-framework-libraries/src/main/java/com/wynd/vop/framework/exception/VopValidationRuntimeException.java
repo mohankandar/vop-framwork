@@ -21,7 +21,7 @@ public class VopValidationRuntimeException extends VopRuntimeException {
 	/**
 	 * Constructs a new <b>runtime</b> Exception indicating a validation or defense error.
 	 *
-	 * @see VopRuntimeException#BipRuntimeException(String, String, MessageSeverity, HttpStatus)
+	 * @see VopRuntimeException#VopRuntimeException(String, String, MessageSeverity, HttpStatus)
 	 *
 	 * @param key - the consumer-facing key that can uniquely identify the nature of the exception
 	 * @param severity - the severity of the event: FATAL (500 series), ERROR (400 series), WARN (200 series), or INFO/DEBUG/TRACE
@@ -37,7 +37,7 @@ public class VopValidationRuntimeException extends VopRuntimeException {
 	 * Constructs a new <b>runtime</b> Exception indicating a {@link Validator}
 	 * or defense error.
 	 *
-	 * @see VopRuntimeException#BipRuntimeException(String, String, MessageSeverity, HttpStatus, Throwable)
+	 * @see VopRuntimeException#VopRuntimeException(String, String, MessageSeverity, HttpStatus, Throwable)
 	 *
 	 * @param key - the consumer-facing key that can uniquely identify the nature of the exception
 	 * @param severity - the severity of the event: FATAL (500 series), ERROR (400 series), WARN (200 series), or INFO/DEBUG/TRACE

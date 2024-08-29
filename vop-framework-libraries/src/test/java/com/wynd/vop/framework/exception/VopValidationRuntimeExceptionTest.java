@@ -14,7 +14,7 @@ public class VopValidationRuntimeExceptionTest {
 	private static final MessageKey TEST_KEY = MessageKeys.NO_KEY;
 
 	@Test
-	public void initializeBipValidationRuntimeExceptionTest() {
+	public void initializeVopValidationRuntimeExceptionTest() {
 		assertNotNull(new VopValidationRuntimeException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST));
 		assertNotNull(new VopValidationRuntimeException(TEST_KEY, MessageSeverity.ERROR, HttpStatus.BAD_REQUEST,
 				new Exception()));

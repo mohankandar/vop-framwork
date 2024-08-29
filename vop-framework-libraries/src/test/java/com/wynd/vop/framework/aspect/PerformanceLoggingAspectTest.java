@@ -25,9 +25,9 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class PerformanceLoggingAspectTest extends AbstractBaseLogTester {
 
-	/** Underlying logger implementation of BipLogger */
+	/** Underlying logger implementation of VopLogger */
 	private VopLogger AspectLoggingLOG = super.getLogger(PerformanceLoggingAspect.class);
-	/** Underlying logger implementation of BipLogger */
+	/** Underlying logger implementation of VopLogger */
 	private VopLogger AspectLoggingTestLOG = super.getLogger(PerformanceLoggingAspectTest.class);
 
 	@Mock
