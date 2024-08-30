@@ -51,9 +51,9 @@ import static org.mockito.Mockito.mock;
 @RunWith(MockitoJUnitRunner.class)
 public class BaseWsClientConfigTest {
 
-	private Resource KEYSTORE = new FileSystemResource("src/test/resources/ssl/dev/vaebnweb1Keystore.jks");
+	private Resource KEYSTORE = new FileSystemResource("src/test/resources/ssl/dev/dummyKeystore.jks");
 	private String KEYSTORE_PASS = "password";
-	private Resource TRUSTSTORE = new FileSystemResource("src/test/resources/ssl/dev/vaebnTruststore.jks");
+	private Resource TRUSTSTORE = new FileSystemResource("src/test/resources/ssl/dev/dummyTruststore.jks");
 	private String TRUSTSTORE_PASS = "password";
 
 	@Mock

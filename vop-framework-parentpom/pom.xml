@@ -926,7 +926,7 @@
         <skipPerfTests>true</skipPerfTests>
         <!-- Custom properties for local deployment -->
         <repositoryName>vop-framework</repositoryName>
-        <repositoryOwner>department-of-veterans-affairs</repositoryOwner>
+        <repositoryOwner>WYND</repositoryOwner>
       </properties>
       <build>
         <plugins>

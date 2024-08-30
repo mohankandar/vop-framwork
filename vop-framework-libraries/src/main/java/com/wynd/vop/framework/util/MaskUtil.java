@@ -10,9 +10,6 @@ import java.util.Arrays;
  * <b>Before using this class in your logging statements</b>, confirm that the masking is not already being done by the logger,
  * or consider adding a regex filter to the {@code logback-spring.xml} configuration.
  * <br/>
- * For more information, see <a
- * href="https://github.com/department-of-veterans-affairs/vop-reference-person/blob/master/docs/log-audit-management.md">Log and Audit
- * Management</a>
  * <p>
  * This class provides:
  * <ul>

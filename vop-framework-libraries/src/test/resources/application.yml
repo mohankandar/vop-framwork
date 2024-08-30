@@ -1,11 +1,11 @@
 #This file is only used for the unit test purposes
-vop-reference-partner.client.ws.endpoint: http://localhost:9736/testEndPoint
+vop-reference-partner.client.ws.endpoint: http://localhost:9001/testEndPoint
 
 #*********************************************************************
 # Apache Trusted Crypto Configuration Security files
 #*********************************************************************
 vop.reference.security.crypto.provider: org.apache.ws.security.components.crypto.Merlin
 vop.reference.security.crypto.keystore.type: jks
-vop.reference.security.crypto.keystore.alias: ebn_vbms_cert
-vop.reference.security.crypto.keystore.password: changeit
-vop.reference.security.crypto.keystore.keystore:  /encryption/EFolderService/vbmsKeystore.jks
+vop.reference.security.crypto.keystore.alias: dummyKeystore
+vop.reference.security.crypto.keystore.password: password
+vop.reference.security.crypto.keystore.keystore:  src/test/resources/ssl/dummyKeystore.jks

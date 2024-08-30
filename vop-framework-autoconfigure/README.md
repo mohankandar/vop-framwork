@@ -9,7 +9,7 @@ The [`vop-framework-logback-starter.xml`] defines the Logback configuration _inc
 The framework-supplied appender can be referenced in service [`logback-spring.xml`] by including the resource:
 
 ```xml
-<include resource="gov/va/vop/framework/starter/logger/vop-framework-logback-starter.xml" />
+<include resource="com/wynd/vop/framework/starter/logger/vop-framework-logback-starter.xml" />
 <appender-ref ref="VOP_FRAMEWORK_ASYNC_CONSOLE_APPENDER" />
 ```
 
@@ -175,6 +175,6 @@ Standard maven dependency configuration.
 <dependency>
     <groupId>com.wynd.vop.framework</groupId>
     <artifactId>vop-framework-autoconfigure</artifactId>
-    <version><latest version></version>
+    <version>latest version</version>
 </dependency>
 ```

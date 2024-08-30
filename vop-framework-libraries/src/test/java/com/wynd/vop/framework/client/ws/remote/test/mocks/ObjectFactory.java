@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each
  * Java content interface and Java element interface
- * generated in the gov.va.vetservices.refdata.api.v1.transfer package.
  * <p>
  * An ObjectFactory allows you to programatically
  * construct new instances of the Java representation
@@ -21,11 +20,6 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-	/**
-	 * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package:
-	 * gov.va.vetservices.refdata.api.v1.transfer
-	 *
-	 */
 	public ObjectFactory() {
 	}
 
